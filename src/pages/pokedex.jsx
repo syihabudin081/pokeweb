@@ -1,12 +1,14 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import {  useNavigate } from "react-router-dom";
 
 function Pokedex() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState(data)
   // const [pokemontype, setType] = useState([]);
   const [status, setFetchStatus] = useState(false);
+  const [id,setCurrentId] = useState(-1)
   const colors = {
     // fire: '#FDDFDF',
     // grass: '#DEFDE0',
@@ -65,7 +67,7 @@ function Pokedex() {
   // useEffect(() => {
   //     getPokemonList();
   // }, [])
-
+let navigate = useNavigate();
   useEffect(() => {
     fetchdata();
   }, []);
@@ -122,6 +124,13 @@ function Pokedex() {
   //   }
 
   // };
+  let detailHandler = (event) => {
+    let idData = parseInt(event.target.value);
+    setCurrentId(idData);
+    navigate(`/pokemon_detail/${idData}`)
+  }
+
+
 
   return (
     <>
@@ -177,9 +186,7 @@ function Pokedex() {
                 <div class="flex  flex-col items-center pb-10">
                   <img
                     class="mb-3 w-32 h-32 rounded-full shadow-lg bg-white object-contain border-gray-400 border-2"
-                    // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                    //   index + 1
-                    // }.png`}
+            
                     src={res.sprites.other.dream_world.front_default}
                     alt="Bonnie image"
                     style={{ "border-color": colors[res.types[0].type.name] }}
@@ -197,6 +204,7 @@ function Pokedex() {
                     <button
                       to="/detail_job"
                       value={res.id}
+                      onClick={detailHandler}
                       class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
                       Detail

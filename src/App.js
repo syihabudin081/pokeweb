@@ -4,6 +4,7 @@ import Navbar from "./component/Navbar";
 import Landingpage from "./pages/landingpage";
 import Pokedex from "./pages/pokedex";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Pokemondetail from "./pages/pokemondetail";
 function App() {
   return (
     <>
@@ -27,6 +28,15 @@ function App() {
               </>
                
               
+            }
+          />
+              <Route
+            path="/pokemon_detail/:idData"
+            element={
+              <>
+                <Navbar/>
+                <Pokemondetail/>
+              </>
             }
           />
         </Routes>
