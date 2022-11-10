@@ -20,7 +20,9 @@ function Pokemondetail() {
 
 
   return (
-   
+   <>
+    detailpage
+   </>
   )
 }
 
